@@ -1,8 +1,7 @@
-package com.application.seb.projet5_mynews;
+package com.application.seb.projet5_mynews.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +12,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import Fragment.PageAdapter;
+import com.application.seb.projet5_mynews.R;
+
+import com.application.seb.projet5_mynews.Fragment.PageAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

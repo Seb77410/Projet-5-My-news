@@ -1,4 +1,4 @@
-package Fragment;
+package com.application.seb.projet5_mynews.Fragment;
 
 
 import android.content.Context;

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/fragment_page_item0_image"
+        android:layout_width="83dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/fragment_page_item0_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/fragment_page_item0_image"
+        app:layout_constraintTop_toTopOf="@+id/fragment_page_item0_image" />
+
+
+    <TextView
+        android:id="@+id/fragment_page_item0_title"
+        android:layout_width="305dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:lines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/fragment_page_item0_section"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_page_item0_section" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="312dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#FF909090"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fragment_page_item0_title"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_page_item0_title" />
+
+    <TextView
+        android:id="@+id/fragment_page_item0_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintTop_toTopOf="@+id/fragment_page_item0_section" />
+</android.support.constraint.ConstraintLayout>
