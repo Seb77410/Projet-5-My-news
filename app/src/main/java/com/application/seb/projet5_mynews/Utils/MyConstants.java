@@ -53,4 +53,11 @@ public class MyConstants {
     //  Section value for search http request
     //----------------------------------------------------------------------------------------------
     public static final String BUSINESS_SECTION = "business";
+
+    //----------------------------------------------------------------------------------------------
+    //  Notifications channel
+    //----------------------------------------------------------------------------------------------
+    static final String CHANNEL_1_ID = "channel1";
+    static final String CHANNEL_1_NAME= "Channel 1";
+    static final String CHANNEL_1_DESCRIPTION = "This is channel 1";
 }
