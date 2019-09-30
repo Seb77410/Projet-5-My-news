@@ -1,6 +1,5 @@
 package com.application.seb.projet5_mynews.Fragment;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,33 +13,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.application.seb.projet5_mynews.Activities.WebViewActivity;
 import com.application.seb.projet5_mynews.Model.SearchResponse;
+import com.application.seb.projet5_mynews.Model.MostPopularResponse;
 import com.application.seb.projet5_mynews.Model.TopStoriesResponse;
 import com.application.seb.projet5_mynews.R;
-import com.application.seb.projet5_mynews.Views.MostPopularAdapter;
+import com.application.seb.projet5_mynews.Utils.ItemClickSupport;
+import com.application.seb.projet5_mynews.Utils.MyConstants;
+import com.application.seb.projet5_mynews.Utils.NewYorkTimesStream;
 import com.application.seb.projet5_mynews.Views.SearchAdapter;
+import com.application.seb.projet5_mynews.Views.MostPopularAdapter;
 import com.application.seb.projet5_mynews.Views.TopStoriesAdapter;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.application.seb.projet5_mynews.Model.MostPopularResponse;
-import com.application.seb.projet5_mynews.Utils.MyConstants;
-import com.application.seb.projet5_mynews.Utils.NewYorkTimesStream;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class PageFragment extends Fragment {
-
 
     // Create keys and value for our Bundle
     private static final String KEY_POSITION = "position";
@@ -106,7 +102,7 @@ public class PageFragment extends Fragment {
         //Execute request  and show result according position argument
         this.executeHttpRequest(recyclerView,requestPullRefresh,getActivity(), bundle);
         Log.d("Business search result","into onCreateView after http request : " + businessResults);
-       // this.configureOnClickRecyclerView(recyclerView);
+        this.configureOnClickRecyclerView(recyclerView);
 
         return pagerResult;
     }
@@ -173,7 +169,7 @@ public class PageFragment extends Fragment {
      *Configure item click on RecyclerView
      * @param recyclerView is item recycler view
      */
-/*    private void configureOnClickRecyclerView(RecyclerView recyclerView) {
+    private void configureOnClickRecyclerView(RecyclerView recyclerView) {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_page_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -205,7 +201,7 @@ public class PageFragment extends Fragment {
                 });
     }
 
-*/
+
     //----------------------------------------------------------------------------------------------
     // HTTP Request with RxJava and Retrofit
     //----------------------------------------------------------------------------------------------
@@ -378,6 +374,5 @@ public class PageFragment extends Fragment {
         if (this.disposable3 != null && !this.disposable3.isDisposed()) this.disposable3.dispose();
 
     }
-
 
 }
