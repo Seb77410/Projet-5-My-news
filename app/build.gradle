@@ -1,4 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
+
+jacoco {
+    toolVersion = "0.8.3"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
 
 android {
     compileSdkVersion 28
@@ -14,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            testCoverageEnabled true
         }
     }
 }
@@ -41,4 +53,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+
 }
