@@ -2,6 +2,7 @@ package com.application.seb.projet5_mynews.Fragment;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -31,13 +32,13 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         PageFragment fragment = null;
         switch (position){
             case 0:
-                fragment = new PageFragment();
+                fragment = PageFragment.newInstance(position,new Bundle());
                 break;
             case 1:
-                fragment = new PageFragment();
+                fragment = PageFragment.newInstance(position,new Bundle());
                 break;
             case 2:
-                fragment = new PageFragment();
+                fragment = PageFragment.newInstance(position,new Bundle());
                 break;
         }
         return fragment;
