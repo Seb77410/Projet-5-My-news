@@ -2,9 +2,13 @@ package com.application.seb.projet5_mynews.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +16,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.application.seb.projet5_mynews.Fragment.PageAdapter;
 import com.application.seb.projet5_mynews.R;
 
-import com.application.seb.projet5_mynews.Fragment.PageAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //-----------------------------------------------
     // References
@@ -73,6 +77,54 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //-----------------------------------------------
+    // Show Navigation Drawer
+    //-----------------------------------------------
+
+    /**
+     * This method Open/Close the menu drawer on UI
+     */
+    @Override
+    public void onBackPressed() {
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    /**This method will allow to manage the clicks on the drawer
+     * menu buttons.
+     *
+     * @param menuItem is the current clicked button  the Drawer menu
+     * @return true to show ViewPager result
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        int id = menuItem.getItemId();
+        switch (id){
+            // "Top stories" button ==> Show "top stories" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_top_stories :
+                pager.setCurrentItem(0);
+                break;
+            // "Most popular" button ==> Show "most popular" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_most_popular:
+                pager.setCurrentItem(1);
+                break;
+            // "Business" button ==> Show "Business" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_business:
+                pager.setCurrentItem(2);
+                break;
+            default:
+                break;
+        }
+        this.drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
 
     //-----------------------------------------------
     // On Create
@@ -85,23 +137,17 @@ public class MainActivity extends AppCompatActivity {
 
         this.configureToolBar();
 
+        this.configureDrawerLayout();
+
+        this.configureNavigationView();
+
         this.configureViewPagerAndTabs();
-
     }
 
-    //-----------------------------------------------
-    // Configure methods
-    //-----------------------------------------------
 
-    /**
-     *This method configure the MainActivity Toolbar
-     */
-    private void configureToolBar(){
-        // Glue toolbar to .xml file
-        this.mActionBarToolbar =  findViewById(R.id.toolbar_activity_main);
-        // Show the toolbar
-        setSupportActionBar(mActionBarToolbar);
-    }
+    //-----------------------------------------------
+    // Show View Pager
+    //-----------------------------------------------
 
     /**
      *This method configure the ViewPager and his TabLayout
@@ -120,4 +166,47 @@ public class MainActivity extends AppCompatActivity {
         // Design purpose. Tabs have the same width
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
+
+
+
+    //-----------------------------------------------
+    // Configure methods
+    //-----------------------------------------------
+
+    /**
+     *This method configure the MainActivity Toolbar
+     */
+    private void configureToolBar(){
+        // Glue toolbar to .xml file
+        this.mActionBarToolbar =  findViewById(R.id.toolbar_activity_main);
+        // Show the toolbar
+        setSupportActionBar(mActionBarToolbar);
+    }
+
+    /**
+     * This method configure Drawer Layout
+     */
+    private void configureDrawerLayout(){
+        // Glue drawerLayout to .xml file
+        this.drawerLayout =  findViewById(R.id.activity_main_drawer_layout);
+        // Glue drawer menu to MainActivity toolbar
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mActionBarToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        // Add listener to the menu drawer
+        drawerLayout.addDrawerListener(toggle);
+        // Add animation on drawer menu button when Open/close
+        toggle.syncState();
+    }
+
+    /**
+     * This method configure the Navigation view
+     */
+    private void configureNavigationView(){
+        // Glue NavigationView to .xml file
+        NavigationView navigationView = findViewById(R.id.activity_main_nav_view);
+        // Allow user tu click on Menu drawer item button
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
 }
+

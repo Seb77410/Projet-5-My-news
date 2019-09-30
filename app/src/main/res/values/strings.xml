@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">My news</string>
+
+    <!-- Toolbar title values -->
+    <string name="notifications_activity_title">Notifications</string>
     <string name="search_activity_name">Search</string>
 
     <!-- Main activity menu values -->
@@ -7,11 +10,51 @@
     <string name="menu_help">Help</string>
     <string name="menu_notifications">Notifications</string>
 
+    <!-- Navigation drawer values -->
+    <string name="most_popular">Most popular</string>
+    <string name="top_stories">Top stories</string>
+    <string name="category">Categories</string>
+    <string name="navigation_drawer_open">Navigation drawer open</string>
+    <string name="navigation_drawer_close">Navigation drawer close</string>
+
+    <!-- Search / Notifications  activity layout values-->
+    <string name="Search_query_term">Search query term</string>
+    <string name="Begin_date">Begin Date</string>
+    <string name="End_date">End Date</string>
+    <string name="Arts">Arts</string>
+    <string name="Business">Business</string>
+    <string name="Entrepreneurs">Entrepreneurs</string>
+    <string name="Politics">Politics</string>
+    <string name="Sports">Sports</string>
+    <string name="Travel">Travel</string>
+    <string name="switch_compat_text">Enable notifications (once per day)</string>
+    <string name="spinner_hint">Select a date</string>
+
     <!-- TabLayout title for viewPager -->
     <string name="top_stories_tabLayout_title">TOP STORIES</string>
     <string name="most_popular_tabLayout_title">MOST POPULAR</string>
     <string name="business_tabLayout_title">BUSINESS</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- AlertDialogue values -->
+    <string name="no_result_title">No result</string>
+    <string name="no_result_message">No result found. Try to expand your search</string>
+    <string name="no_category_title">No category selected</string>
+    <string name="no_category_message">Please select at last one category</string>
+    <string name="no_query_title">No query</string>
+    <string name="no_query_message">Please enter at least one query word</string>
+    <string name="no_query_no_category_title">No query and no category selected</string>
+    <string name="no_query_no_category_message">Please enter at least one query word and select at least one category</string>
+    <string name="checkbox_not_uncheckable_title">Can"'t uncheck</string>
+    <string name="checkbox_not_uncheckable_message">At least one category must be selected or uncheck "Enable notifications" button </string>
+
+    <!-- Notifications values -->
+    <string name="new_article_title">Nouvel article disponible</string>
+    <string name="new_articles_title">Nouveaux articles disponibles</string>
+    <string name="new_articles_message">Un nouvel article vous interessant est disponible</string>
+    <string name="new_article_message_1st_part">Il y a</string>
+    <string name="new_article_message_2nd_part">nouveaux articles qui vous interessent !</string>
+
+
+
+
 </resources>
