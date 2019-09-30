@@ -55,5 +55,18 @@ public interface NewYorkTimesService {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
+
+    //----------------------------------------------------------------------------------------------
+    // Search article request
+    //----------------------------------------------------------------------------------------------
+    @GET(MyConstants.SEARCH_BODY_REQUEST)
+    Observable<SearchResponse> getSearchQueryRequest(@QueryMap Map<String, String> optionsMap);
+
+    Retrofit retrofit4 = new Retrofit.Builder()
+            .baseUrl(MyConstants.SEARCH_HEAD_REQUEST)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build();
+
 }
 

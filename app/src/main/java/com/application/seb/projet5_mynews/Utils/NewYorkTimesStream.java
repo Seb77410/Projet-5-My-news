@@ -50,4 +50,17 @@ public class NewYorkTimesStream {
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
     }
+
+    //----------------------------------------------------------------------------------------------
+    // Observable for Search article api request
+    //----------------------------------------------------------------------------------------------
+
+    public static Observable<SearchResponse> streamFetchQueryRequest(HashMap<String, String> optionsMap) {
+        //Log.e("SECTION IN STREAM : ", options.toString() );
+        NewYorkTimesService newYorkTimesService = NewYorkTimesService.retrofit4.create(NewYorkTimesService.class);
+        return newYorkTimesService.getSearchQueryRequest(optionsMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
 }

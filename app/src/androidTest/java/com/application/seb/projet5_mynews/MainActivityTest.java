@@ -1,18 +1,12 @@
 package com.application.seb.projet5_mynews;
 
-import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import com.application.seb.projet5_mynews.Activities.MainActivity;
-import com.application.seb.projet5_mynews.Activities.NotificationsActivity;
-import com.application.seb.projet5_mynews.Activities.SearchActivity;
-import com.application.seb.projet5_mynews.Activities.MainActivity;
-import com.application.seb.projet5_mynews.Activities.NotificationsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.contrib.DrawerMatchers.isClosed;
 import static androidx.test.espresso.Espresso.onView;
@@ -24,14 +18,11 @@ import static androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasSho
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
-import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-
 
 
 public class MainActivityTest {

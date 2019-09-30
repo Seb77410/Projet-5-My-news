@@ -58,4 +58,39 @@ public class FormatDate {
     }
 
 
+    /**
+     *This method convert the Spinner selected date into format yyyy/MM/dd
+     * @param year is the Spinner year selected
+     * @param month is the Spinner month selected
+     * @param dayOfMonth is the Spinner day selected
+     * @return a String value with the new format
+     */
+    public static String convertDateForSpinner(int year, int month, int dayOfMonth){
+        return year +"/"+ convertNumber(month) +"/"+ convertNumber(dayOfMonth);
+    }
+
+    /**
+     * his method convert the Spinner selected date into format yyyyMMdd
+     * @param year is the Spinner year selected
+     * @param month is the Spinner month selected
+     * @param dayOfMonth is the Spinner day selected
+     * @return a String value with the new format
+     */
+    public static String convertDateForSave(int year, int month, int dayOfMonth){
+        return year+convertNumber(month)+convertNumber(dayOfMonth);
+    }
+
+    /**
+     * This method will add a zero before an int value if it is under 10
+     * @param input is the int value
+     * @return a new int value if necessary
+     */
+    public static String convertNumber(int input) {
+        if (input >= 10) {
+            return String.valueOf(input);
+        } else {
+            return "0" + input;
+        }
+    }
+
 }
