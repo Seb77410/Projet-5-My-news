@@ -16,6 +16,8 @@ public class MyConstants {
     static final String SEARCH_BODY_REQUEST = "articlesearch.json";
     static final String SEARCH_HEAD_REQUEST = "https://api.nytimes.com/svc/search/v2/";
 
+    public static final String PHOTO_BASE_URL = "https://static01.nyt.com/";
+
     //----------------------------------------------------------------------------------------------
     //  Api key
     //----------------------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ public class MyConstants {
     //----------------------------------------------------------------------------------------------
     //  Notifications Shared preference values
     //----------------------------------------------------------------------------------------------
-    public  static  final  String SHARED_PREFERENCES_NAME = "notifications_parameters";
+    public static  final  String SHARED_PREFERENCES_NAME = "notifications_parameters";
     public static final String SEARCH_REQUEST_QUERY = "search_request_query";
     public static final String SEARCH_REQUEST_QUERY_FILTERS = "search_request_query_filters";
     public static final String NOTIFICATIONS_ON = "notifications_ON";

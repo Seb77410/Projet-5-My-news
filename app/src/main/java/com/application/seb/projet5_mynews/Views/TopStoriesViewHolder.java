@@ -31,9 +31,13 @@ class TopStoriesViewHolder extends RecyclerView.ViewHolder {
 
     void updateWithTopStoriesrArticles(TopStoriesResponse.TopStoriesResult result, RequestManager glide) {
         Log.d("MULTIMEDIA", result.getMultimedia().toString());
+        if (!result.getSubsection().isEmpty()){
+            this.textView3.setText(result.getSection() + " > " + result.getSubsection());
+        } else {
+            this.textView3.setText(result.getSection());
+        }
         this.textView.setText(result.getTitle());
         this.textView2.setText(FormatDate.convertTopStoriesDate(result.getPublishedDate()));
-        this.textView3.setText(result.getSection());
 
         if(!result.getMultimedia().isEmpty()) {
             Log.d("URL DE LA PHOTO", result.getMultimedia().get(0).getUrl());

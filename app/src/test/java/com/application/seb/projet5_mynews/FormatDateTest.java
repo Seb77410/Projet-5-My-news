@@ -5,13 +5,8 @@ import com.application.seb.projet5_mynews.Utils.FormatDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+
 public class FormatDateTest {
 
 
@@ -21,7 +16,6 @@ public class FormatDateTest {
         String dateOutput = "2019-09-20";
         Assert.assertEquals(dateOutput, FormatDate.convertBusinessDate(dateInput));
 
-        //Assert.assertNotEquals();
     }
 
     @Test
@@ -29,6 +23,19 @@ public class FormatDateTest {
         String dateInput = "2019-09-21T11:20:42-04:00";
         String dateOutput = "2019-09-21";
         Assert.assertEquals(dateOutput,FormatDate.convertTopStoriesDate(dateInput));
+    }
+
+
+    @Test
+    public void convertSpinnerDateTest() {
+        String outPut = "2019/09/21";
+        Assert.assertEquals(outPut, FormatDate.convertDateForSpinner(2019,9,21));
+    }
+
+    @Test
+    public void convertNumberTest() {
+        Assert.assertEquals("02", FormatDate.convertNumber(2));
+        Assert.assertEquals("23", FormatDate.convertNumber(23));
     }
 
 }

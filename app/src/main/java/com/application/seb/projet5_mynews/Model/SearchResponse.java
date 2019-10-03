@@ -44,6 +44,9 @@ public class SearchResponse implements java.io.Serializable {
         @SerializedName("section_name")
         @Expose
         private String sectionName;
+        @SerializedName("subsection_name")
+        @Expose
+        private String subsectionName;
         @SerializedName("_id")
         @Expose
         private String id;
@@ -67,6 +70,8 @@ public class SearchResponse implements java.io.Serializable {
         public String getSectionName() {
             return sectionName;
         }
+
+        public String getSubsectionName() {return subsectionName; }
 
         public String getId() {
             return id;

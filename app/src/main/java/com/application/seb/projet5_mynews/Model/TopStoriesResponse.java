@@ -24,6 +24,9 @@ public class TopStoriesResponse {
         @SerializedName("section")
         @Expose
         private String section;
+        @SerializedName("subsection")
+        @Expose
+        private String subsection;
         @SerializedName("url")
         @Expose
         private String url;
@@ -40,6 +43,8 @@ public class TopStoriesResponse {
         public String getSection() {
             return section;
         }
+
+        public String getSubsection() {return subsection;}
 
         public String getUrl() {
             return url;
