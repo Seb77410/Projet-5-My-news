@@ -1,7 +1,8 @@
 package com.application.seb.projet5_mynews.Views;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,8 +47,8 @@ class SearchViewHolder extends RecyclerView.ViewHolder {
             url = MyConstants.PHOTO_BASE_URL + result.getMultimedia().get(0).getUrl();}
         glide.load(url)
                 .apply(RequestOptions.centerCropTransform())
-                .placeholder(R.drawable.no_mage)
-                .error(R.drawable.no_mage)
+                .placeholder(R.drawable.no_image)
+                .error(R.drawable.no_image)
                 .into(imageView);
 
     }

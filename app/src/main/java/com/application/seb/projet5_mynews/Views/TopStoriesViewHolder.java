@@ -1,7 +1,8 @@
 package com.application.seb.projet5_mynews.Views;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,10 +44,10 @@ class TopStoriesViewHolder extends RecyclerView.ViewHolder {
             Log.d("URL DE LA PHOTO", result.getMultimedia().get(0).getUrl());
             glide.load(result.getMultimedia().get(0).getUrl())
                     .apply(RequestOptions.centerCropTransform())
-                    .placeholder(R.drawable.no_mage)
-                    .error(R.drawable.no_mage)
+                    .placeholder(R.drawable.no_image)
+                    .error(R.drawable.no_image)
                     .into(imageView);
-        }else {imageView.setImageResource(R.drawable.no_mage);}
+        }else {imageView.setImageResource(R.drawable.no_image);}
 
     }
 
