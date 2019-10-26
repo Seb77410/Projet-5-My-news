@@ -208,7 +208,7 @@ public class SearchRequestParameters {
     //----------------------------------------------------------------------------------------------
 
     /**
-     *This method check if user can uncheck CheckBox for NotificationActivity
+     *This method calculate total number checked checkboxes
      */
     public void onCheckedListener(){
         checkedBoxNumber = 0;

@@ -153,7 +153,7 @@ public class SearchActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Date dialogue de selection
+                // Date dialogue selection
                 selector = new DatePickerDialog (SearchActivity.this, R.style.TimePickerTheme ,new DatePickerDialog.OnDateSetListener () {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -236,7 +236,6 @@ public class SearchActivity extends AppCompatActivity {
                     public void onComplete() {}
                 });
     }
-
 
     //----------------------------------------------------------------------------------------------
     // On Destroy

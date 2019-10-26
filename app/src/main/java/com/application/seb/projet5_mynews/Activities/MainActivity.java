@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.application.seb.projet5_mynews.Fragment.PageAdapter;
+import com.application.seb.projet5_mynews.Views.PageAdapter;
 import com.application.seb.projet5_mynews.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -31,6 +31,111 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     public ViewPager pager;
     public Context context = this;
+
+
+
+    //-----------------------------------------------
+    // On Create
+    //-----------------------------------------------
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        this.configureToolBar();
+
+        this.configureDrawerLayout();
+
+        this.configureNavigationView();
+
+        this.configureViewPagerAndTabs();
+    }
+
+
+    //-----------------------------------------------
+    // Configure Toolbar
+    //-----------------------------------------------
+
+    /**
+     *This method configure the MainActivity Toolbar
+     */
+    private void configureToolBar(){
+        // Glue toolbar to .xml file
+        this.mActionBarToolbar =  findViewById(R.id.toolbar_activity_main);
+        // Show the toolbar
+        setSupportActionBar(mActionBarToolbar);
+    }
+
+    //-----------------------------------------------
+    // Drawer menu
+    //-----------------------------------------------
+
+    /**
+     * This method configure Drawer Layout
+     */
+    private void configureDrawerLayout(){
+        // Glue drawerLayout to .xml file
+        this.drawerLayout =  findViewById(R.id.activity_main_drawer_layout);
+        // Glue drawer menu to MainActivity toolbar
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mActionBarToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        // Add listener to the menu drawer
+        drawerLayout.addDrawerListener(toggle);
+        // Add animation on drawer menu button when Open/close
+        toggle.syncState();
+    }
+
+    /**
+     * This method configure the Navigation view
+     */
+    private void configureNavigationView(){
+        // Glue NavigationView to .xml file
+        NavigationView navigationView = findViewById(R.id.activity_main_nav_view);
+        // Allow user tu click on Menu drawer item button
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    /**
+     * This method Open/Close the menu drawer on UI
+     */
+    @Override
+    public void onBackPressed() {
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    /**This method will allow to manage the clicks on the drawer
+     * menu buttons.
+     *
+     * @param menuItem is the current clicked button  the Drawer menu
+     * @return true to show ViewPager result
+     */
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        int id = menuItem.getItemId();
+        switch (id){
+            // "Top stories" button ==> Show "top stories" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_top_stories :
+                pager.setCurrentItem(0);
+                break;
+            // "Most popular" button ==> Show "most popular" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_most_popular:
+                pager.setCurrentItem(1);
+                break;
+            // "Business" button ==> Show "Business" page on the MainActivity ViewPager
+            case R.id.activity_main_drawer_business:
+                pager.setCurrentItem(2);
+                break;
+            default:
+                break;
+        }
+        this.drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     //-----------------------------------------------
     // Show menu on toolbar of UI
@@ -79,74 +184,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //-----------------------------------------------
-    // Show Navigation Drawer
-    //-----------------------------------------------
-
-    /**
-     * This method Open/Close the menu drawer on UI
-     */
-    @Override
-    public void onBackPressed() {
-        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-    /**This method will allow to manage the clicks on the drawer
-     * menu buttons.
-     *
-     * @param menuItem is the current clicked button  the Drawer menu
-     * @return true to show ViewPager result
-     */
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-        int id = menuItem.getItemId();
-        switch (id){
-            // "Top stories" button ==> Show "top stories" page on the MainActivity ViewPager
-            case R.id.activity_main_drawer_top_stories :
-                pager.setCurrentItem(0);
-                break;
-            // "Most popular" button ==> Show "most popular" page on the MainActivity ViewPager
-            case R.id.activity_main_drawer_most_popular:
-                pager.setCurrentItem(1);
-                break;
-            // "Business" button ==> Show "Business" page on the MainActivity ViewPager
-            case R.id.activity_main_drawer_business:
-                pager.setCurrentItem(2);
-                break;
-            default:
-                break;
-        }
-        this.drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
-
-    //-----------------------------------------------
-    // On Create
-    //-----------------------------------------------
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.configureToolBar();
-
-        this.configureDrawerLayout();
-
-        this.configureNavigationView();
-
-        this.configureViewPagerAndTabs();
-    }
-
-
-    //-----------------------------------------------
     // Show View Pager
     //-----------------------------------------------
 
@@ -167,47 +204,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Design purpose. Tabs have the same width
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
-
-
-
-    //-----------------------------------------------
-    // Configure methods
-    //-----------------------------------------------
-
-    /**
-     *This method configure the MainActivity Toolbar
-     */
-    private void configureToolBar(){
-        // Glue toolbar to .xml file
-        this.mActionBarToolbar =  findViewById(R.id.toolbar_activity_main);
-        // Show the toolbar
-        setSupportActionBar(mActionBarToolbar);
-    }
-
-    /**
-     * This method configure Drawer Layout
-     */
-    private void configureDrawerLayout(){
-        // Glue drawerLayout to .xml file
-        this.drawerLayout =  findViewById(R.id.activity_main_drawer_layout);
-        // Glue drawer menu to MainActivity toolbar
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mActionBarToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        // Add listener to the menu drawer
-        drawerLayout.addDrawerListener(toggle);
-        // Add animation on drawer menu button when Open/close
-        toggle.syncState();
-    }
-
-    /**
-     * This method configure the Navigation view
-     */
-    private void configureNavigationView(){
-        // Glue NavigationView to .xml file
-        NavigationView navigationView = findViewById(R.id.activity_main_nav_view);
-        // Allow user tu click on Menu drawer item button
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
 
 }
 

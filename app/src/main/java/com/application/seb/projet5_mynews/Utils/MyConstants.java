@@ -34,12 +34,10 @@ public class MyConstants {
     public static final String STRING_RESPONSE = "string_response";
 
     //----------------------------------------------------------------------------------------------
-    //  Notifications Shared preference values
+    //  Notifications intent values
     //----------------------------------------------------------------------------------------------
-    public static  final  String SHARED_PREFERENCES_NAME = "notifications_parameters";
     public static final String SEARCH_REQUEST_QUERY = "search_request_query";
     public static final String SEARCH_REQUEST_QUERY_FILTERS = "search_request_query_filters";
-    public static final String NOTIFICATIONS_ON = "notifications_ON";
 
     //----------------------------------------------------------------------------------------------
     //  HashMap values for search API request

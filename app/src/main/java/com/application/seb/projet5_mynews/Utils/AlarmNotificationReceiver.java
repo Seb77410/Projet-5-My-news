@@ -29,15 +29,15 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         notificationManager = NotificationManagerCompat.from(context);
-        Log.d("ALARME RECU", "ALARME RECU ALARME RECU ALARM RECU");
-        //Toast.makeText(context, "L'arlarme se déclenche bien", Toast.LENGTH_LONG).show();
+        Log.d("ALARME RECUE", "ALARME RECUE !");
 
         getIntentArgumentsToHashMap(intent);
         addCurrentDateToHashMap();
 
         // Execute Http request
-        executeSearchRequest(optionsMap, context);
-
+        if(optionsMap.get(MyConstants.QUERY) != null && optionsMap.get(MyConstants.QUERY_FILTERS) != null) {
+            executeSearchRequest(optionsMap, context);
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -74,7 +74,6 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
 
     private void executeSearchRequest(final HashMap<String, String> optionsMap, final Context context) {
         Log.d("HashMap options", optionsMap.toString());
-        //searchResults = searchResponse.getTheResponse().getDocs();
         Disposable disposable = NewYorkTimesStream.streamFetchQueryRequest(optionsMap)
                 .subscribeWith(new DisposableObserver<SearchResponse>() {
                     @Override
@@ -87,7 +86,6 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
                         if (searchResponse.getTheResponse().getDocs().size() >= 1) {
                             sendOnChannel1(context);
                         }
-
                     }
 
                     @Override

@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -27,7 +26,6 @@ import com.application.seb.projet5_mynews.Utils.AlarmNotificationReceiver;
 import com.application.seb.projet5_mynews.R;
 import com.application.seb.projet5_mynews.Model.SearchRequestParameters;
 import com.application.seb.projet5_mynews.Utils.MyConstants;
-import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -53,6 +51,9 @@ public class NotificationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        //-----------------------------
+        // Configure view
+        //-----------------------------
         // References
         CheckBox artCheckBox = findViewById(R.id.artsCheckBox);
         CheckBox businessCheckBox = findViewById(R.id.businessCheckBox);
@@ -72,11 +73,10 @@ public class NotificationsActivity extends AppCompatActivity {
         // Display the part of the view for SearchActivity
         configureActivityLayout();
 
-        //-----------------
-        // Save data
-        //-----------------
-
-        // And glue it to my SearchRequestParameters object
+        //-----------------------------
+        // Able / disable notifications
+        //-----------------------------
+        // Glue checkboxes and options map to SearchRequestParameters object
         optionsMap = searchRequestParameters.getOptionsMap();
         searchRequestParameters.setArtCheckBox(artCheckBox);
         searchRequestParameters.setBusinessCheckBox(businessCheckBox);
@@ -86,8 +86,40 @@ public class NotificationsActivity extends AppCompatActivity {
         searchRequestParameters.setTravelCheckBox(travelCheckBox);
         searchRequestParameters.setEditText(editText);
 
+        // Calculate how many checkboxes are checked
         searchRequestParameters.onCheckedListener();
+        // Listen when user able/disable notifications
+        checkForAllowNotifications();
+    }
 
+
+    //----------------------------------------------------------------------------------------------
+    // Configure NotificationsActivity layout
+    //----------------------------------------------------------------------------------------------
+    private void configureActivityLayout() {
+
+        // Set dates layout invisible
+        button.setVisibility(View.INVISIBLE);
+        beginDateLayout.setVisibility(View.INVISIBLE);
+        endDateLayout.setVisibility(View.INVISIBLE);
+
+        // And set checkBox layout constraint
+        ConstraintLayout constraintLayout = findViewById(R.id.activity_search_constraintLayout);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(R.id.activity_search_checkboxs_contener, ConstraintSet.TOP, R.id.editText_search, ConstraintSet.BOTTOM, 20);
+        constraintSet.applyTo(constraintLayout);
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+    //  When user try to able or disable notifications
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * This method check if user try to able/disable notifications
+     */
+    private void checkForAllowNotifications(){
         // User use the switch for able/enable notifications
         allowNotificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -110,7 +142,7 @@ public class NotificationsActivity extends AppCompatActivity {
                         allowNotificationsSwitch.setChecked(false);
                         searchRequestParameters.setSwitchCompat(false);
                     }
-                }else{
+                } else {
                     allowNotificationsSwitch.setChecked(false);
                     searchRequestParameters.setSwitchCompat(false);
                 }
@@ -118,30 +150,11 @@ public class NotificationsActivity extends AppCompatActivity {
         });
     }
 
-
-    //----------------------------------------------------------------------------------------------
-    // Configure NotificationsActivity layout
-    //----------------------------------------------------------------------------------------------
-    public void configureActivityLayout(){
-
-        // Set dates layout invisible
-        button.setVisibility(View.INVISIBLE);
-        beginDateLayout.setVisibility(View.INVISIBLE);
-        endDateLayout.setVisibility(View.INVISIBLE);
-
-        // And set checkBox layout constraint
-        ConstraintLayout constraintLayout = findViewById(R.id.activity_search_constraintLayout);
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(constraintLayout);
-        constraintSet.connect(R.id.activity_search_checkboxs_contener,ConstraintSet.TOP,R.id.editText_search,ConstraintSet.BOTTOM,20);
-        constraintSet.applyTo(constraintLayout);
-    }
-
     //----------------------------------------------------------------------------------------------
     // Configure NotificationsActivity toolbar
     //----------------------------------------------------------------------------------------------
 
-    public void configureActivityToolbar(){
+    private void configureActivityToolbar() {
         // Set action bar
         mToolBar.setTitle(getString(R.string.notifications_activity_title));
         setSupportActionBar(mToolBar);
@@ -158,7 +171,8 @@ public class NotificationsActivity extends AppCompatActivity {
     // Alarm manager
     //----------------------------------------------------------------------------------------------
 
-    /** This method will start an alarm everyday at 21h
+    /**
+     * This method will start an alarm everyday at 21h
      *
      * @param context is the context
      */
@@ -169,15 +183,15 @@ public class NotificationsActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 7);
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
         // Alarm references
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmNotificationReceiver.class);
         // Pass the searchRequestParameters as intent arguments
-        intent.putExtra(MyConstants.SEARCH_REQUEST_QUERY, searchRequestParameters.getQuery() );
+        intent.putExtra(MyConstants.SEARCH_REQUEST_QUERY, searchRequestParameters.getQuery());
         intent.putExtra(MyConstants.SEARCH_REQUEST_QUERY_FILTERS, searchRequestParameters.getQueryFilter());
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -185,45 +199,27 @@ public class NotificationsActivity extends AppCompatActivity {
         // The alarm will start everyday
         if (alarmManager != null) {
             Log.d("programming alarm", " alarmManager is not null");
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES/15, pendingIntent);
         }
     }
-
-
 
     //----------------------------------------------------------------------------------------------
     // On pause save notifications parameters
     //----------------------------------------------------------------------------------------------
 
-
     @Override
     protected void onPause() {
         super.onPause();
-
-        SharedPreferences arrayPreferences = context.getSharedPreferences(MyConstants.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor arrayPrefEditor = arrayPreferences.edit();
-        arrayPrefEditor.clear();
-
         // If notifications are allowed
-        if(allowNotificationsSwitch.isChecked()){
-            // We pass notifications parameters to sting
-            Gson gson = new Gson();
-            String query = gson.toJson(searchRequestParameters.getQuery());
-            String queryFilters = gson.toJson(searchRequestParameters.getbFilterQuery());
-            // We save string parameters in a shared preference
-            arrayPrefEditor.putString(MyConstants.SEARCH_REQUEST_QUERY, query).apply();
-            arrayPrefEditor.putString(MyConstants.SEARCH_REQUEST_QUERY_FILTERS, queryFilters).apply();
-            arrayPrefEditor.putBoolean(MyConstants.NOTIFICATIONS_ON, true );
-            arrayPrefEditor.commit();
-            Log.d("SharedPreferences", "into onPause, Notifications_ON  : " + arrayPreferences.getBoolean(MyConstants.NOTIFICATIONS_ON, false));
+        if (allowNotificationsSwitch.isChecked()) {
             // We start the alarm
             startAlarm(context);
             // And we notify saving success to user with a toast
             Toast.makeText(getApplicationContext(), "Notifications parameters saved", Toast.LENGTH_LONG).show();
+        }else{
+            startAlarm(context);
+            // And we notify user that notifications are disable
+            Toast.makeText(getApplicationContext(), "Notifications disable", Toast.LENGTH_LONG).show();
         }
-        // Else we save that notifications are not allowed
-        else{arrayPrefEditor.putBoolean(MyConstants.NOTIFICATIONS_ON, false ).commit();}
     }
-
 }

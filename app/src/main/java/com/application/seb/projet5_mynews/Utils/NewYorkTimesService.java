@@ -67,6 +67,5 @@ public interface NewYorkTimesService {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
-
 }
 

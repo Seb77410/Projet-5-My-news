@@ -15,7 +15,6 @@ public class FormatDateTest {
         String dateInput = "2019-09-20T21:58:53+0000";
         String dateOutput = "2019-09-20";
         Assert.assertEquals(dateOutput, FormatDate.convertBusinessDate(dateInput));
-
     }
 
     @Test

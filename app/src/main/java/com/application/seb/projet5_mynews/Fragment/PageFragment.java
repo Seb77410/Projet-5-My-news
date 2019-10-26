@@ -91,12 +91,11 @@ public class PageFragment extends Fragment {
 
         // Get layout of PageFragment
         View pagerResult = inflater.inflate(R.layout.fragment_page, container, false);
-
         // Get widgets from layout and serialise it
         RecyclerView recyclerView = pagerResult.findViewById(R.id.recyclerView);
         SwipeRefreshLayout requestPullRefresh = pagerResult.findViewById(R.id.fragment_page_pull_refresh);
 
-        // Configure the view
+        // Configure the view refresh
         this.configureSwipeRefreshLayout(recyclerView, requestPullRefresh);
         // Get arguments to bundle
         final Bundle bundle = getArguments();
@@ -373,7 +372,6 @@ public class PageFragment extends Fragment {
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
         if (this.disposable2 != null && !this.disposable2.isDisposed()) this.disposable2.dispose();
         if (this.disposable3 != null && !this.disposable3.isDisposed()) this.disposable3.dispose();
-
     }
 
 }
