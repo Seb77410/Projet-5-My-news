@@ -136,7 +136,9 @@ public class NotificationsActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
 
     /**
-     * This method check if user try to able/disable notifications
+     * This method check if user checked at least one section (checkBox) and
+     * enter at least one query word when he try to able notifications.
+     * Else we show an AlertDialog
      */
     private void checkForAllowNotifications(){
         // User use the switch for able/enable notifications
@@ -149,12 +151,12 @@ public class NotificationsActivity extends AppCompatActivity {
                     searchRequestParameters.saveQueryWords();
                     optionsMap.put(MyConstants.APIKEY, MyConstants.API_KEY);
 
-                    // If User set filters and query, we start the search.
+                    // If User set filters and query, we allow notifications
                     if (searchRequestParameters.getbFilterQuery() && searchRequestParameters.getbQuery()) {
                         // Notifications button stay ON
                         searchRequestParameters.setSwitchCompat(true);
                     }
-                    // Else we show an AlertDialog and enable notifications
+                    // Else we show an AlertDialog and disable notifications
                     else {
                         searchRequestParameters.checkForAlertDialog();
                         // Notifications button stay OFF
@@ -194,7 +196,8 @@ public class NotificationsActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
 
     /**
-     * This method will start an alarm everyday at 21h
+     * This method save notifications parameters into an intent
+     * and will start an alarm everyday at 21h
      *
      * @param context is the context
      */
@@ -218,7 +221,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // The alarm will start everyday
+        // The alarm will start everyday at 21h
         if (alarmManager != null) {
             Log.d("programming alarm", " alarmManager is not null");
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES/15, pendingIntent);
