@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class FormatDateTest {
 
-
     @Test
     public void convertBusinessDateTest() {
         String dateInput = "2019-09-20T21:58:53+0000";
@@ -23,7 +22,6 @@ public class FormatDateTest {
         String dateOutput = "2019-09-21";
         Assert.assertEquals(dateOutput,FormatDate.convertTopStoriesDate(dateInput));
     }
-
 
     @Test
     public void convertSpinnerDateTest() {

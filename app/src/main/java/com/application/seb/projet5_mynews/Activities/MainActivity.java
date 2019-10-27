@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.application.seb.projet5_mynews.Utils.MyConstants;
 import com.application.seb.projet5_mynews.Views.PageAdapter;
 import com.application.seb.projet5_mynews.R;
 import com.google.android.material.navigation.NavigationView;
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Get ViewPager from layout
         pager = findViewById(R.id.activity_main_viewpager);
         // Set total page number to 3
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(MyConstants.VIEW_PAGER_TABS_NUMBER);
         //Set Adapter PageAdapter and glue it together
         pager.setAdapter(new PageAdapter(getSupportFragmentManager(), context));
         // Get TabLayout from layout

@@ -42,38 +42,6 @@ public class MainActivityTest {
     }
 
     @Test
-    public void menuMainTest() {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText(R.string.menu_notifications)).perform(click());
-        intended(hasComponent(NotificationsActivity.class.getName()));
-
-        onView(isRoot()).perform(pressBack());
-
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText(R.string.menu_help)).perform(click());
-
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText(R.string.menu_about)).perform(click());
-
-    }
-
-    @Test
-    public void searchButtonAndSearchActivityTest() {
-        onView(withId(R.id.search_menu)).perform(click());
-        intended(hasComponent(SearchActivity.class.getName()));
-
-        onView(withId(R.id.search_click_button)).check(matches(isDisplayed()));
-        onView(withId(R.id.editText_search)).check(matches(isDisplayed()));
-        onView(withId(R.id.begin_date_contener)).check(matches(isDisplayed()));
-        onView(withId(R.id.end_date_contener)).check(matches(isDisplayed()));
-        onView(withId(R.id.activity_search_checkboxs_contener)).check(matches(isDisplayed()));
-        onView(withId(R.id.activity_notifications_line_and_switch_contener)).check(matches(not(isDisplayed())));
-
-        onView(withId(R.id.search_click_button)).perform(click());
-    }
-
-
-    @Test
     public void viewPagerTest() {
         onView(withId(R.id.activity_main_viewpager)).check(matches(isDisplayed()));
         onView(withId(R.id.activity_main_tabs)).check(matches(isDisplayed()));
@@ -94,7 +62,36 @@ public class MainActivityTest {
         onView(allOf(withText(R.string.business_tabLayout_title),isDescendantOfA(withId(R.id.activity_main_tabs))))
                 .perform(click())
                 .check(matches(isSelected()));
-
-
     }
+
+    @Test
+    public void menuMainTest() {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.menu_notifications)).perform(click());
+        intended(hasComponent(NotificationsActivity.class.getName()));
+
+        onView(isRoot()).perform(pressBack());
+
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.menu_help)).perform(click());
+
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText(R.string.menu_about)).perform(click());
+    }
+
+    @Test
+    public void searchButtonAndSearchActivityTest() {
+        onView(withId(R.id.search_menu)).perform(click());
+        intended(hasComponent(SearchActivity.class.getName()));
+
+        onView(withId(R.id.search_click_button)).check(matches(isDisplayed()));
+        onView(withId(R.id.editText_search)).check(matches(isDisplayed()));
+        onView(withId(R.id.begin_date_contener)).check(matches(isDisplayed()));
+        onView(withId(R.id.end_date_contener)).check(matches(isDisplayed()));
+        onView(withId(R.id.activity_search_checkboxs_contener)).check(matches(isDisplayed()));
+        onView(withId(R.id.activity_notifications_line_and_switch_contener)).check(matches(not(isDisplayed())));
+
+        onView(withId(R.id.search_click_button)).perform(click());
+    }
+
 }

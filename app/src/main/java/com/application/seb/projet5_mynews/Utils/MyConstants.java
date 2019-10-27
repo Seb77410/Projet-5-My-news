@@ -24,12 +24,12 @@ public class MyConstants {
     public static final String API_KEY ="e4EHaNynYFV5FeqPowUi95AWoLFVB26Y";
 
     //----------------------------------------------------------------------------------------------
-    //  WebView intent key
+    // WebView intent key
     //----------------------------------------------------------------------------------------------
     public static final String WEB_VIEW_URL ="webViewUrl";
 
     //----------------------------------------------------------------------------------------------
-    //SearchResultActivity intent value
+    // SearchResultActivity intent value
     //----------------------------------------------------------------------------------------------
     public static final String STRING_RESPONSE = "string_response";
 
@@ -60,4 +60,10 @@ public class MyConstants {
     static final String CHANNEL_1_ID = "channel1";
     static final String CHANNEL_1_NAME= "Channel 1";
     static final String CHANNEL_1_DESCRIPTION = "This is channel 1";
+
+    //----------------------------------------------------------------------------------------------
+    //  View pager adapter value
+    //----------------------------------------------------------------------------------------------
+
+    public static final int VIEW_PAGER_TABS_NUMBER = 3;
 }

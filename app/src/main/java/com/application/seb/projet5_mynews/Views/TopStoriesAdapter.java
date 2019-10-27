@@ -24,11 +24,6 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder
     private List<TopStoriesResponse.TopStoriesResult> results;
     private RequestManager glide;
 
-    // For return a Result object
-    public TopStoriesResponse.TopStoriesResult getTopStoriesResult(int position){
-        return this.results.get(position);
-    }
-
     // Constructor
     public TopStoriesAdapter(List<TopStoriesResponse.TopStoriesResult> results, RequestManager glide){
         this.results = results;
@@ -50,7 +45,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder
     @Override
     public void onBindViewHolder(@NonNull TopStoriesViewHolder topStoriesViewHolder, int i) {
         TopStoriesResponse.TopStoriesResult result = results.get(i);
-        topStoriesViewHolder.updateWithTopStoriesrArticles(result, this.glide);
+        topStoriesViewHolder.updateWithTopStoriesArticles(result, this.glide);
         Log.d("Objet", "results.size :" + results.size() + "/n" + results.toString());
     }
 

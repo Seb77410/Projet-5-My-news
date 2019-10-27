@@ -92,10 +92,30 @@ public class NotificationsActivity extends AppCompatActivity {
         checkForAllowNotifications();
     }
 
+    //----------------------------------------------------------------------------------------------
+    // Configure NotificationsActivity toolbar
+    //----------------------------------------------------------------------------------------------
+
+    private void configureActivityToolbar() {
+        // Set action bar
+        mToolBar.setTitle(getString(R.string.notifications_activity_title));
+        setSupportActionBar(mToolBar);
+        //Set back stack
+        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
     //----------------------------------------------------------------------------------------------
     // Configure NotificationsActivity layout
     //----------------------------------------------------------------------------------------------
+
+    /**
+     * this method configure activity view
+     */
     private void configureActivityLayout() {
 
         // Set dates layout invisible
@@ -110,7 +130,6 @@ public class NotificationsActivity extends AppCompatActivity {
         constraintSet.connect(R.id.activity_search_checkboxs_contener, ConstraintSet.TOP, R.id.editText_search, ConstraintSet.BOTTOM, 20);
         constraintSet.applyTo(constraintLayout);
     }
-
 
     //----------------------------------------------------------------------------------------------
     //  When user try to able or disable notifications
@@ -151,19 +170,22 @@ public class NotificationsActivity extends AppCompatActivity {
     }
 
     //----------------------------------------------------------------------------------------------
-    // Configure NotificationsActivity toolbar
+    // On pause, we start the alarm
     //----------------------------------------------------------------------------------------------
 
-    private void configureActivityToolbar() {
-        // Set action bar
-        mToolBar.setTitle(getString(R.string.notifications_activity_title));
-        setSupportActionBar(mToolBar);
-        //Set back stack
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_black_24dp, null);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // If notifications are allowed
+        if (allowNotificationsSwitch.isChecked()) {
+            // We start the alarm
+            startAlarm(context);
+            // And we notify saving success to user with a toast
+            Toast.makeText(getApplicationContext(), "Notifications parameters saved", Toast.LENGTH_LONG).show();
+        }else{
+            startAlarm(context);
+            // And we notify user that notifications are disable
+            Toast.makeText(getApplicationContext(), "Notifications disable", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -203,23 +225,5 @@ public class NotificationsActivity extends AppCompatActivity {
         }
     }
 
-    //----------------------------------------------------------------------------------------------
-    // On pause save notifications parameters
-    //----------------------------------------------------------------------------------------------
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // If notifications are allowed
-        if (allowNotificationsSwitch.isChecked()) {
-            // We start the alarm
-            startAlarm(context);
-            // And we notify saving success to user with a toast
-            Toast.makeText(getApplicationContext(), "Notifications parameters saved", Toast.LENGTH_LONG).show();
-        }else{
-            startAlarm(context);
-            // And we notify user that notifications are disable
-            Toast.makeText(getApplicationContext(), "Notifications disable", Toast.LENGTH_LONG).show();
-        }
-    }
 }

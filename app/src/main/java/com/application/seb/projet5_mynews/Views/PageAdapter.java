@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.application.seb.projet5_mynews.Fragment.PageFragment;
 import com.application.seb.projet5_mynews.R;
+import com.application.seb.projet5_mynews.Utils.MyConstants;
 
 
 public class PageAdapter extends FragmentStatePagerAdapter {
@@ -25,7 +26,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     //Number of page to show
     @Override
     public int getCount() {
-        return(3);
+        return(MyConstants.VIEW_PAGER_TABS_NUMBER);
     }
 
     // Page to return

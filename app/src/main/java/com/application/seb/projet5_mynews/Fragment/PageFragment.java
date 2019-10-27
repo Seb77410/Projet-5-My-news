@@ -269,7 +269,6 @@ public class PageFragment extends Fragment {
      * @param recyclerView is PageFragment recycler view
      */
     private void executeMostPopularRequest(final SwipeRefreshLayout requestPullRefresh, final RecyclerView recyclerView) {
-
         // Execute the stream subscribing to Observable defined inside NewYorkTimesStream
         this.disposable = NewYorkTimesStream.streamFetchPeriodAndApiKey(1, MyConstants.API_KEY)
                 .subscribeWith(new DisposableObserver<MostPopularResponse>() {
@@ -311,7 +310,7 @@ public class PageFragment extends Fragment {
                         topStoriesResults.clear();
                         topStoriesResults.addAll(response.getTopStoriesResults());
                         topStoriesAdapter.notifyDataSetChanged();
-                        //Log.e("MYData When update UI", topStoriesResponse.getTopStoriesResults().toString());
+                        //Log.d("MYData When update UI", topStoriesResponse.getTopStoriesResults().toString());
                     }
 
                     @Override
@@ -341,7 +340,7 @@ public class PageFragment extends Fragment {
                         businessResults.clear();
                         configureRecyclerView(searchResponse, recyclerView, activity);
                         businessResults.addAll(searchResponse.getTheResponse().getDocs());
-                        //Log.e("BUSINESS RESULT", "Business result : " + businessResults);
+                        //Log.d("Business result", businessResults);
                         searchAdapter.notifyDataSetChanged();
                     }
 

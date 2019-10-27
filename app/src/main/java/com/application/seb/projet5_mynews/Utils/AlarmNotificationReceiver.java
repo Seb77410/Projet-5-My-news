@@ -21,8 +21,7 @@ import io.reactivex.observers.DisposableObserver;
 public class AlarmNotificationReceiver extends BroadcastReceiver {
 
     private NotificationManagerCompat notificationManager;
-    HashMap<String, String> optionsMap = new HashMap<>();
-    //List<SearchResponse.Doc> searchResults = new ArrayList<>();
+    private HashMap<String, String> optionsMap = new HashMap<>();
     private SearchResponse mSearchResponse;
 
     @Override
@@ -65,7 +64,6 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
         Log.d("Alarm notifications","receiver current date : " + beginDate);
         // Put current date
         optionsMap.put(MyConstants.BEGIN_DATE, beginDate);
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -74,11 +72,11 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
 
     private void executeSearchRequest(final HashMap<String, String> optionsMap, final Context context) {
         Log.d("HashMap options", optionsMap.toString());
+        //searchResults = searchResponse.getTheResponse().getDocs();
         Disposable disposable = NewYorkTimesStream.streamFetchQueryRequest(optionsMap)
                 .subscribeWith(new DisposableObserver<SearchResponse>() {
                     @Override
                     public void onNext(SearchResponse searchResponse) {
-
 
                         Log.d("Result list size:", searchResponse.getTheResponse().getDocs().toString());
                         mSearchResponse = searchResponse;
@@ -117,7 +115,6 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
-
         notificationManager.notify(1,notification);
     }
 

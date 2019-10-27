@@ -55,7 +55,6 @@ public class SearchRequestParameters {
     // Getters / Setters
     //----------------------------------------------------------------------------------------------
 
-
     public String getQueryFilter() {
         return queryFilter;
     }
@@ -74,10 +73,6 @@ public class SearchRequestParameters {
 
     public void setEditText(EditText editText) {
         this.editText = editText;
-    }
-
-    public EditText getEditText() {
-        return editText;
     }
 
     public String getQuery() {
@@ -124,10 +119,8 @@ public class SearchRequestParameters {
 
         // Reinitialise Query
         bQuery = false;
-
         // Get user query
         query = editText.getText().toString();
-
         // If at least one character is enter on the editText
         if (!query.isEmpty()) {
             // We save it as query
@@ -174,21 +167,6 @@ public class SearchRequestParameters {
     //----------------------------------------------------------------------------------------------
     // Alert Dialog
     //----------------------------------------------------------------------------------------------
-
-    /**
-     * This method check if an AlertDialog have to appear on UI
-     */
-    public void checkForAlertDialog() {
-
-        if (!getbFilterQuery() && getbQuery()){
-            buildAndShowAlertDialog(context.getString(R.string.no_category_title), context.getString(R.string.no_category_message)); }
-        if (!getbQuery() && getbFilterQuery()){
-            buildAndShowAlertDialog( context.getString(R.string.no_query_title), context.getString(R.string.no_query_message));}
-        if (!getbQuery() && !getbFilterQuery()){
-            buildAndShowAlertDialog( context.getString(R.string.no_query_no_category_title), context.getString(R.string.no_query_no_category_message));}
-
-    }
-
     /**
      * This method create AlertDialog for SearchActivity and NotificationActivity
      * @param alertTitle is tha AlertDialog title
@@ -201,6 +179,19 @@ public class SearchRequestParameters {
                 .setMessage(alertMessage)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    /**
+     * This method check if an AlertDialog have to appear on UI
+     */
+    public void checkForAlertDialog() {
+
+        if (!getbFilterQuery() && getbQuery()){
+            buildAndShowAlertDialog(context.getString(R.string.no_category_title), context.getString(R.string.no_category_message)); }
+        if (!getbQuery() && getbFilterQuery()){
+            buildAndShowAlertDialog( context.getString(R.string.no_query_title), context.getString(R.string.no_query_message));}
+        if (!getbQuery() && !getbFilterQuery()){
+            buildAndShowAlertDialog( context.getString(R.string.no_query_no_category_title), context.getString(R.string.no_query_no_category_message));}
     }
 
     //----------------------------------------------------------------------------------------------
@@ -245,7 +236,6 @@ public class SearchRequestParameters {
             // And if notifications are allowed, we save parameters
             if (switchCompat){saveFilterQuery();}
         }
-
     }
 
     /**

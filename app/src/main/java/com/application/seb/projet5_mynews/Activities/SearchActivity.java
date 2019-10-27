@@ -36,6 +36,7 @@ import io.reactivex.observers.DisposableObserver;
 
 public class SearchActivity extends AppCompatActivity {
 
+    // For data
     private TextView textViewBeginDate;
     private TextView textViewEndDate;
     private DatePickerDialog selector;
@@ -43,107 +44,14 @@ public class SearchActivity extends AppCompatActivity {
     private String beginDateForSave;
     private String endDate;
     private String endDateForSave;
-    private EditText editText;
-    private CheckBox artCheckBox;
-    private CheckBox businessCheckBox;
-    private CheckBox entrepreneurCheckBox;
-    private CheckBox politicCheckBox;
-    private CheckBox sportCheckBox;
-    private CheckBox travelCheckBox;
     private Context context = this;
     private Disposable disposable;
     private SearchRequestParameters searchRequestParameters = new SearchRequestParameters(context);
-
-
-    //----------------------------------------------------------------------------------------------
-    // ON CREATE
-    //----------------------------------------------------------------------------------------------
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
-        //---------------------
-        // Remove notifications contener from view
-        //---------------------
-        RelativeLayout relativeLayout = findViewById(R.id.activity_notifications_line_and_switch_contener);
-        relativeLayout.setVisibility(View.INVISIBLE);
-
-        //---------------------
-        // Action bar
-        //---------------------
-        // Views
-        Toolbar mToolBar = findViewById(R.id.toolbar_activity_search);
-        setSupportActionBar(mToolBar);
-        // Set back stack
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_black_24dp, null);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        //---------------------
-        // Date picker dialog
-        //---------------------
-        // Set Begin and End Date EditText
-        ImageButton imageBeginDate = findViewById(R.id.button_begin_date);
-        ImageButton imageEndDate = findViewById(R.id.button_end_date);
-        textViewBeginDate = findViewById(R.id.begin_date_for_spinner);
-        textViewEndDate = findViewById(R.id.end_date_for_spinner);
-
-        // Show date picker
-        showDatePicker(imageBeginDate, textViewBeginDate);
-        showDatePicker(imageEndDate,textViewEndDate);
-
-        //---------------------
-        // Get data for Http request
-        //---------------------
-        Button searchButton = findViewById(R.id.search_click_button);
-        artCheckBox = findViewById(R.id.artsCheckBox);
-        businessCheckBox = findViewById(R.id.businessCheckBox);
-        entrepreneurCheckBox = findViewById(R.id.entreprenersCheckBox);
-        politicCheckBox = findViewById(R.id.politicCheckBox);
-        sportCheckBox = findViewById(R.id.sportCheckBox);
-        travelCheckBox = findViewById(R.id.travelCheckBox);
-        editText = findViewById(R.id.editText_search);
-
-        // Start search
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // For data
-                HashMap<String, String> optionsMap = searchRequestParameters.getOptionsMap();
-
-                // Set searchRequestParameters checkBoxs
-                searchRequestParameters.setArtCheckBox(artCheckBox);
-                searchRequestParameters.setBusinessCheckBox(businessCheckBox);
-                searchRequestParameters.setEntrepreneurCheckBox(entrepreneurCheckBox);
-                searchRequestParameters.setPoliticCheckBox(politicCheckBox);
-                searchRequestParameters.setSportCheckBox(sportCheckBox);
-                searchRequestParameters.setTravelCheckBox(travelCheckBox);
-                searchRequestParameters.setEditText(editText);
-
-                // Save data to HashMap
-                searchRequestParameters.saveFilterQuery();
-                searchRequestParameters.saveQueryWords();
-                saveDate(optionsMap);
-                optionsMap.put(MyConstants.APIKEY, MyConstants.API_KEY);
-
-                // If User set filters and query, we start the search.
-                if (searchRequestParameters.getbFilterQuery() && searchRequestParameters.getbQuery()){executeSearchRequest(optionsMap);}
-                // Else we show an AlertDialog
-                else{searchRequestParameters.checkForAlertDialog();}
-            }
-        });
-
-    }
-
+    private Button searchButton;
 
     //----------------------------------------------------------------------------------------------
     // Date picker
     //----------------------------------------------------------------------------------------------
-
     /**
      * This method make appear a date picker dialog and show his selected date
      * @param imageButton click on this image and date picker appear
@@ -182,12 +90,11 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     //----------------------------------------------------------------------------------------------
-    // Get Date
+    // Save selected date
     //----------------------------------------------------------------------------------------------
-
     /**
-     * This method is going to add date wich was selected in the date picker into a HashMap
-     * @param optionsMap is the HashMap wich correspond to search parameters
+     * This method is going to add date that was selected in the date picker into a HashMap
+     * @param optionsMap is the HashMap that correspond to search parameters
      */
     private void saveDate(HashMap<String, String> optionsMap){
 
@@ -196,6 +103,98 @@ public class SearchActivity extends AppCompatActivity {
         if(endDate != null){optionsMap.put(MyConstants.END_DATE, endDateForSave);}
 
         Log.d("optionsMap saveDates", optionsMap.toString());
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // ON CREATE
+    //----------------------------------------------------------------------------------------------
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
+
+        //---------------------
+        // Remove notifications container from view
+        //---------------------
+        RelativeLayout relativeLayout = findViewById(R.id.activity_notifications_line_and_switch_contener);
+        relativeLayout.setVisibility(View.INVISIBLE);
+
+        //---------------------
+        // Action bar
+        //---------------------
+        // Views
+        Toolbar mToolBar = findViewById(R.id.toolbar_activity_search);
+        setSupportActionBar(mToolBar);
+        // Set back stack
+        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_black_24dp, null);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        //---------------------
+        // Date picker dialog
+        //---------------------
+        // Set Begin and End Date EditText
+        ImageButton imageBeginDate = findViewById(R.id.button_begin_date);
+        ImageButton imageEndDate = findViewById(R.id.button_end_date);
+        textViewBeginDate = findViewById(R.id.begin_date_for_spinner);
+        textViewEndDate = findViewById(R.id.end_date_for_spinner);
+
+        // Show date picker
+        showDatePicker(imageBeginDate, textViewBeginDate);
+        showDatePicker(imageEndDate,textViewEndDate);
+
+        //---------------------
+        // Get data for Http request
+        //---------------------
+        //References
+        searchButton = findViewById(R.id.search_click_button);
+        CheckBox artCheckBox = findViewById(R.id.artsCheckBox);
+        CheckBox businessCheckBox = findViewById(R.id.businessCheckBox);
+        CheckBox entrepreneurCheckBox = findViewById(R.id.entreprenersCheckBox);
+        CheckBox politicCheckBox = findViewById(R.id.politicCheckBox);
+        CheckBox sportCheckBox = findViewById(R.id.sportCheckBox);
+        CheckBox travelCheckBox = findViewById(R.id.travelCheckBox);
+        EditText editText = findViewById(R.id.editText_search);
+
+        // Glue checkboxes and editText to SearchRequestParameters object
+        searchRequestParameters.setArtCheckBox(artCheckBox);
+        searchRequestParameters.setBusinessCheckBox(businessCheckBox);
+        searchRequestParameters.setEntrepreneurCheckBox(entrepreneurCheckBox);
+        searchRequestParameters.setPoliticCheckBox(politicCheckBox);
+        searchRequestParameters.setSportCheckBox(sportCheckBox);
+        searchRequestParameters.setTravelCheckBox(travelCheckBox);
+        searchRequestParameters.setEditText(editText);
+
+        // When user click on search button
+        clickOnSearchButton();
+    }
+
+
+
+    //----------------------------------------------------------------------------------------------
+    // When user click on search button
+    //----------------------------------------------------------------------------------------------
+    private void clickOnSearchButton(){
+        // Start search
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Save data to HashMap
+                HashMap<String, String> optionsMap = searchRequestParameters.getOptionsMap();
+                searchRequestParameters.saveFilterQuery();
+                searchRequestParameters.saveQueryWords();
+                saveDate(optionsMap);
+                optionsMap.put(MyConstants.APIKEY, MyConstants.API_KEY);
+
+                // If User set filters and query, we start the search.
+                if (searchRequestParameters.getbFilterQuery() && searchRequestParameters.getbQuery()){executeSearchRequest(optionsMap);}
+                // Else we show an AlertDialog
+                else{searchRequestParameters.checkForAlertDialog();}
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------
@@ -215,7 +214,6 @@ public class SearchActivity extends AppCompatActivity {
 
                         Log.d("Result list :" ,searchResponse.getTheResponse().getDocs().toString());
                         if(searchResponse.getTheResponse().getDocs().size() >=1){
-
                             // Convert response to string for data
                             Gson gson = new Gson();
                             String stringResponse = gson.toJson(searchResponse);

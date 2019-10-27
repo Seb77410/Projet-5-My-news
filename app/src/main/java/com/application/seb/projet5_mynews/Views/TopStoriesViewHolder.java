@@ -30,7 +30,7 @@ class TopStoriesViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.fragment_page_item0_image);
     }
 
-    void updateWithTopStoriesrArticles(TopStoriesResponse.TopStoriesResult result, RequestManager glide) {
+    void updateWithTopStoriesArticles(TopStoriesResponse.TopStoriesResult result, RequestManager glide) {
         Log.d("MULTIMEDIA", result.getMultimedia().toString());
         if (!result.getSubsection().isEmpty()){
             this.textView3.setText(result.getSection() + " > " + result.getSubsection());
